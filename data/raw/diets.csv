@@ -1,0 +1,7 @@
+diet_id,diet_name,avg_daily_calories,carb_pct,protein_pct,fat_pct,difficulty_level
+1,Low-Carb,1600,10,35,55,Alta
+2,Mediterrânea,1800,45,20,35,Média
+3,Vegana,1700,55,15,30,Média
+4,Cetogênica,1500,5,30,65,Alta
+5,Paleo,1750,25,35,40,Alta
+6,Flexitariana,1850,40,25,35,Baixa
