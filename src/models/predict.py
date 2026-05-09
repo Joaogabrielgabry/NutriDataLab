@@ -46,7 +46,7 @@ def predict_weight_loss(patient_features: pd.DataFrame, model_name: str = "Rando
     return model.predict(patient_features)
 
 
-# ── Exemplo de uso ─────────────────────────────────────────────────────────────
+# ?? Exemplo de uso ?????????????????????????????????????????????????????????????
 if __name__ == "__main__":
     print("Carregando dados processados para demonstração...")
     processed_path = Path(__file__).resolve().parents[2] / "data" / "processed" / "dataset_processed.csv"
@@ -65,5 +65,5 @@ if __name__ == "__main__":
     result["proba_success"]    = probas.round(3) if probas is not None else None
     result["pred_weight_loss"] = preds_reg.round(2)
 
-    print("\n🔮 Previsões para 5 pacientes amostrados:")
+    print("\nPrevisões para 5 pacientes amostrados:")
     print(result[["pred_success", "proba_success", "pred_weight_loss"]].to_string())

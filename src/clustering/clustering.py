@@ -19,7 +19,7 @@ FIGURES_DIR = Path(__file__).resolve().parents[2] / "reports" / "figures"
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 
-# ── K-Means ────────────────────────────────────────────────────────────────────
+# ?? K-Means ????????????????????????????????????????????????????????????????????
 def find_optimal_k(X: pd.DataFrame, k_range: range = range(2, 10)) -> int:
     """
     Elbow Method + Silhouette Score para encontrar o K ideal.
@@ -50,7 +50,7 @@ def find_optimal_k(X: pd.DataFrame, k_range: range = range(2, 10)) -> int:
     plt.tight_layout()
     plt.savefig(FIGURES_DIR / "clustering_elbow_silhouette.png", dpi=120)
     plt.close()
-    print(f"✅ Gráfico salvo. Melhor k = {best_k} (Silhouette = {max(silhouettes):.3f})")
+    print(f" Gráfico salvo. Melhor k = {best_k} (Silhouette = {max(silhouettes):.3f})")
     return best_k
 
 
@@ -58,7 +58,7 @@ def run_kmeans(X: pd.DataFrame, k: int) -> np.ndarray:
     """Executa K-Means e retorna labels."""
     km = KMeans(n_clusters=k, random_state=42, n_init=10)
     labels = km.fit_predict(X)
-    print(f"✅ K-Means (k={k}) — Distribuição: {dict(zip(*np.unique(labels, return_counts=True)))}")
+    print(f" K-Means (k={k}) - Distribuição: {dict(zip(*np.unique(labels, return_counts=True)))}")
     return labels
 
 
@@ -66,11 +66,11 @@ def run_hierarchical(X: pd.DataFrame, k: int) -> np.ndarray:
     """Executa Clustering Hierárquico Aglomerativo."""
     hc = AgglomerativeClustering(n_clusters=k)
     labels = hc.fit_predict(X)
-    print(f"✅ Hierárquico (k={k}) — Distribuição: {dict(zip(*np.unique(labels, return_counts=True)))}")
+    print(f" Hierárquico (k={k}) - Distribuição: {dict(zip(*np.unique(labels, return_counts=True)))}")
     return labels
 
 
-# ── Visualização PCA 2D ────────────────────────────────────────────────────────
+# ?? Visualização PCA 2D ????????????????????????????????????????????????????????
 def plot_clusters_pca(X: pd.DataFrame, labels: np.ndarray, title: str = "Clusters"):
     """Projeta em 2D via PCA e plota os clusters."""
     pca   = PCA(n_components=2)
@@ -80,14 +80,14 @@ def plot_clusters_pca(X: pd.DataFrame, labels: np.ndarray, title: str = "Cluster
     fig, ax = plt.subplots(figsize=(8, 6))
     scatter = ax.scatter(X_2d[:, 0], X_2d[:, 1], c=labels, cmap="tab10", alpha=0.7, s=30)
     plt.colorbar(scatter, ax=ax, label="Cluster")
-    ax.set_title(f"{title}\n(PCA — {var[0]:.1%} + {var[1]:.1%} variância explicada)")
+    ax.set_title(f"{title}\n(PCA - {var[0]:.1%} + {var[1]:.1%} variância explicada)")
     ax.set_xlabel("PC1")
     ax.set_ylabel("PC2")
     plt.tight_layout()
     filename = title.lower().replace(" ", "_") + "_pca.png"
     plt.savefig(FIGURES_DIR / filename, dpi=120)
     plt.close()
-    print(f"✅ Gráfico PCA salvo: {filename}")
+    print(f" Gráfico PCA salvo: {filename}")
 
 
 def cluster_profile(df_original: pd.DataFrame, labels: np.ndarray) -> pd.DataFrame:
@@ -97,6 +97,6 @@ def cluster_profile(df_original: pd.DataFrame, labels: np.ndarray) -> pd.DataFra
     df = df_original.copy()
     df["cluster"] = labels
     profile = df.groupby("cluster").mean(numeric_only=True).round(2)
-    print("\n📋 Perfil dos Clusters:")
+    print("\n Perfil dos Clusters:")
     print(profile.T.to_string())
     return profile

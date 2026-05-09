@@ -20,7 +20,7 @@ def timer(func):
         start = time.time()
         result = func(*args, **kwargs)
         elapsed = time.time() - start
-        print(f"⏱  {func.__name__} concluído em {elapsed:.2f}s")
+        print(f"{func.__name__} concluído em {elapsed:.2f}s")
         return result
     return wrapper
 
@@ -35,7 +35,7 @@ def describe_dataset(df: pd.DataFrame, name: str = "dataset") -> dict:
         "numeric_cols":   df.select_dtypes(include="number").columns.tolist(),
         "categorical_cols": df.select_dtypes(include="object").columns.tolist(),
     }
-    print(f"\n📋 {name.upper()}")
+    print(f"\n{name.upper()}")
     print(f"   Shape: {stats['shape']}")
     print(f"   Nulos: {stats['missing_total']} ({stats['missing_pct']}%)")
     print(f"   Duplicatas: {stats['duplicates']}")
@@ -49,7 +49,7 @@ def save_report(content: dict, filename: str = "model_results.json"):
     path = REPORTS_DIR / filename
     with open(path, "w", encoding="utf-8") as f:
         json.dump(content, f, indent=2, default=str, ensure_ascii=False)
-    print(f"✅ Relatório salvo: {path}")
+    print(f"Relatório salvo: {path}")
 
 
 def dataframe_to_markdown(df: pd.DataFrame) -> str:
